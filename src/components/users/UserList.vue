@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed, toRefs } from 'vue';
 
 import UserItem from './UserItem.vue';
 import useSearch from '../../hooks/search';
@@ -26,34 +26,9 @@ export default {
   props: ['users'],
   emits: ['list-projects'],
   setup(props) {
-    // const enteredSearchTerm = ref('');
-    // const activeSearchTerm = ref('');
+    const { users } = toRefs(props)
 
-    // const availableUsers = computed(function () {
-    //   let users = [];
-    //   if (activeSearchTerm.value) {
-    //     users = props.users.filter((usr) =>
-    //       usr.fullName.includes(activeSearchTerm.value)
-    //     );
-    //   } else if (props.users) {
-    //     users = props.users;
-    //   }
-    //   return users;
-    // });
-
-    // watch(enteredSearchTerm, function (newValue) {
-    //   setTimeout(() => {
-    //     if (newValue === enteredSearchTerm.value) {
-    //       activeSearchTerm.value = newValue;
-    //     }
-    //   }, 300);
-    // });
-
-    // function updateSearch(val) {
-    //   enteredSearchTerm.value = val;
-    // }
-
-    const { availableItems, enteredSearchTerm, updateSearch } = useSearch(props.users, 'fullName')
+    const { availableItems, enteredSearchTerm, updateSearch } = useSearch(users, 'fullName')
 
     const sorting = ref(null);
     const displayedUsers = computed(function () {
