@@ -36,7 +36,6 @@ export default {
       return user.value.projects && availableItems.value.length > 0;
     });
 
-
     watch(user, function () {
       updateSearch('');
     })
